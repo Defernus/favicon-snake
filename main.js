@@ -113,6 +113,16 @@ const handleKey = (e) => {
 
 document.addEventListener('keydown', handleKey);
 
+const restart = () => {
+    headX = 0;
+    headY = HEIGHT / 2;
+    dir = TOP;
+    bodyParts = [];
+    respawnFruit();
+};
+
+restart();
+
 const handleFrame = async () => {
     dirWasChanded = false;
 
@@ -153,6 +163,10 @@ const handleFrame = async () => {
 
     headX = trueMod(headX, WIDTH);
     headY = trueMod(headY, HEIGHT);
+
+    if (bodyParts.some((part) => part.x === headX && part.y === headY)) {
+        restart();
+    }
 
     setFavicon(canvas);
 
