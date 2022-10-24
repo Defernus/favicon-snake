@@ -143,7 +143,6 @@ const handleFrame = async () => {
 
     let fruitEated = false;
     if (headX === fruitX && headY === fruitY) {
-        setTitle(`${score} 🍎`);
         respawnFruit();
         fruitEated = true;
         ++score;
@@ -151,6 +150,7 @@ const handleFrame = async () => {
         if (score % APPEND_SPEED_EVERY === 0) {
             ++gameSpeed;
         }
+        setTitle(`${score} 🍎`);
     }
 
     bodyParts.forEach((part) => {
@@ -180,8 +180,8 @@ const handleFrame = async () => {
     headY = trueMod(headY, HEIGHT);
 
     if (bodyParts.some((part) => part.x === headX && part.y === headY)) {
-        restart();
         setTitle(`💀: ${score} 🍎`);
+        restart();
     }
 
     setFavicon(canvas);
