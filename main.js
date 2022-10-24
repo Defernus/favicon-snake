@@ -3,6 +3,7 @@ const HEIGHT = 16;
 const BACKGROUND_COLOR = 'white';
 const SNAKE_COLOR = 'black';
 const FRUIT_COLOR = 'red';
+const APPEND_SPEED_EVERY = 5;
 
 const TOP = 0;
 const RIGHT = 1;
@@ -30,7 +31,7 @@ const setTitle = (titleStr) => {
     document.title = titleStr;
 };
 
-let gameSpeed = 5;
+let gameSpeed = 1;
 
 let score = 0;
 
@@ -124,6 +125,8 @@ const restart = () => {
     headY = HEIGHT / 2;
     dir = TOP;
     bodyParts = [];
+    gameSpeed = 5;
+    score = 0;
     respawnFruit();
 };
 
@@ -143,6 +146,11 @@ const handleFrame = async () => {
         respawnFruit();
         fruitEated = true;
         ++score;
+
+        if (score % APPEND_SPEED_EVERY === 0) {
+            ++gameSpeed;
+        }
+
         setTitle(`${score} 🍎`);
     }
 
@@ -174,6 +182,7 @@ const handleFrame = async () => {
 
     if (bodyParts.some((part) => part.x === headX && part.y === headY)) {
         restart();
+        setTitle(`💀: ${score} 🍎`);
     }
 
     setFavicon(canvas);
