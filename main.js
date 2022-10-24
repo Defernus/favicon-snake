@@ -26,7 +26,13 @@ const setFavicon = (canvas) => {
     document.head.appendChild(link);
 };
 
+const setTitle = (titleStr) => {
+    document.title = titleStr;
+};
+
 let gameSpeed = 5;
+
+let score = 0;
 
 let fruitX = 0;
 let fruitY = 0;
@@ -91,21 +97,21 @@ const changeDir = (newDir) => {
 }
 
 const handleKey = (e) => {
-    switch (e.key) {
-        case 'ArrowUp':
-        case 'w':
+    switch (e.keyCode) {
+        case 38:
+        case 87:
             changeDir(TOP);
             break;
-        case 'd':
-        case 'ArrowRight':
+        case 68:
+        case 39:
             changeDir(RIGHT);
             break;
-        case 's':
-        case 'ArrowDown':
+        case 83:
+        case 40:
             changeDir(BOTTOM);
             break;
-        case 'a':
-        case 'ArrowLeft':
+        case 65:
+        case 37:
             changeDir(LEFT);
             break;
     }
@@ -136,6 +142,8 @@ const handleFrame = async () => {
     if (headX === fruitX && headY === fruitY) {
         respawnFruit();
         fruitEated = true;
+        ++score;
+        setTitle(`${score} 🍎`);
     }
 
     bodyParts.forEach((part) => {
