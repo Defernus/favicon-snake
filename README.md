@@ -8,4 +8,4 @@
 
 ## How to run
 
-- Open `index.html` in your browser.
+- Clone repository and open `index.html` in your browser or just try in [here](https://defernus.github.io/favicon-snake/).
